@@ -23,3 +23,4 @@
 2. Change the text `{insert names here}` (with your name for example)
 3. Save the file
 4. Go back to Github Desktop app and in the lower left corner, click "Commit to develop"
+5. Click "Publish Branch"
