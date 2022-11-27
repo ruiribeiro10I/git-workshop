@@ -38,8 +38,6 @@ jobs:
 
     - run: npm run build
 
-    - run: ls -la
-
     - name: Archive artifact
       shell: sh
       run: |
@@ -49,7 +47,7 @@ jobs:
         done
         tar \
           --dereference --hard-dereference \
-          --directory ./dist \
+          --directory ./dist/ \
           -cvf "$RUNNER_TEMP/artifact.tar" \
           --exclude=.git \
           --exclude=.github \
