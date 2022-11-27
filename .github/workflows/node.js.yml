@@ -6,11 +6,7 @@ name: Node.js CI
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-jobs:
-  build:
+  workflow_dispatch:
     inputs:
       path:
         description: "Path of the directory containing the static assets."
@@ -21,6 +17,8 @@ jobs:
         required: false
         default: "1"
 
+jobs:
+  build:
     runs-on: ubuntu-latest
 
     strategy:
@@ -53,14 +51,14 @@ jobs:
           --exclude=.github \
           .
       env:
-        INPUT_PATH: ${{ inputs.path }}
+        INPUT_PATH: ${{ github.event.inputs.path }}
 
     - name: Upload artifact
       uses: actions/upload-artifact@main
       with:
         name: github-pages
         path: ${{ runner.temp }}/artifact.tar
-        retention-days: ${{ inputs.retention-days }}
+        retention-days: ${{ github.event.inputs.retention-days }}
   
   deploy:
     # Add a dependency to the build job
